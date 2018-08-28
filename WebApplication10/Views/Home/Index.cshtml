@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApplication10.Models.Instruction>
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+<table class="table">
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <p></p>
+
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="https://img.getbg.net/upload/full/www.GetBg.net_3D-graphics_The_Universe_in_a_cube_095114_.png">
+                    <div class="caption">
+                        <h3> @item.NameInstruction</h3>
+                        <p>  @item.Decription</p>
+                        <p><a class="btn btn-primary" role="button" asp-action="Details" asp-controller="Instructions" asp-route-id="@item.InstructionId">Details</a></p>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </tbody>

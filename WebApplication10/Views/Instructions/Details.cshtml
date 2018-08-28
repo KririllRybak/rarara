@@ -1,0 +1,64 @@
+﻿@model WebApplication10.Models.Instruction
+@{
+    ViewData["Title"] = "Details";
+}
+@inject UserManager<ApplicationUser> _userManager;
+<h2>Details</h2>
+
+<div>
+    <h3>Instruction</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NameInstruction)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NameInstruction)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Decription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Decription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.UserName)
+        </dd>
+    </dl>
+</div>
+<h4>Steps</h4>
+<hr />
+<div>
+   @foreach(var item in Model.instructionSteps)
+   {
+    <dl class="dl-horizontal">
+        
+        <dd>
+            @item.TitleStep
+        </dd>
+       
+        <dd>
+            @item.Text;
+        </dd>
+    </dl>
+        }
+</div>
+<div>
+    @{
+        bool isAdmin = User.IsInRole("admin");
+    }
+
+    @if (Model.ApplicationUserId == _userManager.GetUserId(User) || isAdmin)
+    {
+        <td>
+            <a asp-action="Edit" asp-controller="Instructions" asp-route-id="@Model.InstructionId">Edit</a>
+            <a asp-action="Delete" asp-controller="Instructions" asp-route-id="@Model.InstructionId">Delete</a>
+        </td>
+    }
+
+    <a asp-action="Index" asp-controller="Home">Back to List</a>
+</div>
